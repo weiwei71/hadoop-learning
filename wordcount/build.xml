@@ -1,0 +1,38 @@
+<project name="wordcount" default="dist" basedir=".">
+
+  <property name="src" location="src"/>
+  <property name="build" location="build"/>
+  <property name="dist" location="dist"/>
+  <property name="lib" location="lib"/>
+  <target name="init">
+    <mkdir dir="${build}"/>
+  </target>
+
+  <target name="resolve">
+    <mkdir dir="${lib}"/>
+    <copy file="/home/weiwei/hadoop-0.20.2-cdh3u2/hadoop-core-0.20.2-cdh3u2.jar"  tofile="${lib}/hadoop-core.jar"/>
+  </target>
+
+  <path id="lib-dependency">
+      <fileset dir="${lib}">
+          <include name="*.jar"/>
+      </fileset>
+  </path>
+  <target name="compile" depends="init, resolve">
+    <javac srcdir="${src}" destdir="${build}">
+        <classpath refid="lib-dependency"/>
+    </javac>
+
+  </target>
+
+  <target name="dist" depends="compile">
+    <mkdir dir="${dist}"/>
+    <jar jarfile="${dist}/wordcount.jar" basedir="${build}"/>
+
+  </target>
+
+  <target name="clean">
+    <delete dir="${build}"/>
+    <delete dir="${dist}"/>
+  </target>
+</project>
