@@ -4,7 +4,6 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapred.JobConf;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
@@ -19,7 +18,7 @@ import java.io.IOException;
 public class WordCountRunner {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
-        if(args.length!=2){
+        if (args.length != 2) {
             printUsage();
             System.exit(-1);
         }
