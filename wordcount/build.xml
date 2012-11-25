@@ -11,6 +11,7 @@
   <target name="resolve">
     <mkdir dir="${lib}"/>
     <copy file="/home/weiwei/hadoop-0.20.2-cdh3u2/hadoop-core-0.20.2-cdh3u2.jar"  tofile="${lib}/hadoop-core.jar"/>
+    <copy file="/home/weiwei/hadoop-0.20.2-cdh3u2/lib/commons-logging-1.0.4.jar"  tofile="${lib}/commons-logging.jar"/>
   </target>
 
   <path id="lib-dependency">
@@ -27,7 +28,10 @@
 
   <target name="dist" depends="compile">
     <mkdir dir="${dist}"/>
-    <jar jarfile="${dist}/wordcount.jar" basedir="${build}"/>
+    <jar jarfile="${dist}/wordcount.jar" basedir="${build}">
+        <zipfileset src="${lib}/hadoop-core.jar" includes="**/*.java **/*.class"/>
+        <zipfileset src="${lib}/commons-logging.jar" includes="**/*.java **/*.class"/>
+    </jar>
 
   </target>
 
