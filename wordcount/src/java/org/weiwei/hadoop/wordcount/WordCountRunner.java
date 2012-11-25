@@ -9,6 +9,7 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
+import org.weiwei.hadoop.util.HadoopUtils;
 
 import java.io.IOException;
 
@@ -19,7 +20,7 @@ public class WordCountRunner {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
         if (args.length != 2) {
-            printUsage();
+            HadoopUtils.printUsage("WordCountRunner input output");
             System.exit(-1);
         }
         Configuration conf = new Configuration();
@@ -42,9 +43,5 @@ public class WordCountRunner {
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
 
         job.waitForCompletion(true);
-    }
-
-    private static void printUsage() {
-        System.out.print("WordCountRunner input output");
     }
 }
